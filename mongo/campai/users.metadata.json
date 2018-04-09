@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"campai.users"},{"v":2,"unique":true,"key":{"email":1},"name":"email_1","ns":"campai.users","background":true}],"uuid":"2e5fc47b54a542809b97c80fbdfa8fa4"}

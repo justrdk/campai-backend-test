@@ -1,19 +1,27 @@
 {
-  "name": "campai-backend-test",
-  "version": "1.0.0",
-  "description": "Backend test for campai role as fullstack developer",
-  "main": "index.js",
-  "scripts": {
-    "test": "ava --verbose"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/midyan/campai-backend-test.git"
-  },
-  "author": "Yan Nunes",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/midyan/campai-backend-test/issues"
-  },
-  "homepage": "https://github.com/midyan/campai-backend-test#readme"
+    "name": "campai-backend-test",
+    "version": "1.0.0",
+    "description": "Backend challenge for campai role as fullstack developer",
+    "main": "index.js",
+    "scripts": {
+        "test": "ava --verbose",
+        "fake-data": "mongorestore mongo/campai/ --db campai"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/midyan/campai-backend-test.git"
+    },
+    "author": "Yan Nunes",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/midyan/campai-backend-test/issues"
+    },
+    "homepage": "https://github.com/midyan/campai-backend-test#readme",
+    "devDependencies": {
+        "ava": "^0.25.0"
+    },
+    "dependencies": {
+        "express": "^4.16.3",
+        "mongoose": "^5.0.14"
+    }
 }
