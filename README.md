@@ -8,8 +8,8 @@ Please read the following notes carefully, since they are of utmost importance f
 
 *   Show us what you know! Think outside of the box. Think about structure, reusability and scalability
 *   You should create your own repository for the front-end. You can set it up however you prefer, but you have to use `React`, a store (Mobx or Redux are both fine) and a comprehensive README to help anyone setup and run your code.
-*   Testing is a must for the backend. Bonus points if you add it to Travis.
-*   Testing the front-end rendering is not necessary, but bonus points if you do :+1:
+*   Testing  for the backend is not necessary. Bonus points if you do. Even more so if you add it to travis.
+*   Testing the front-end is not necessary.
 *   Once again, think about scalability. If I would have to add 20 more endpoints for your server tomorrow, how easy would that be?
 
 Happy coding! :coffee:
