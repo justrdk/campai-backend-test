@@ -41,7 +41,7 @@ npm start
 
 ## Testing
 
-Unit tests are essential for this challenge. You have to use `ava` as you test runner. You can check the documentation [here](https://github.com/avajs/ava).
+Unit tests are essential for this challenge. You have to use `ava` as your test runner. You can check the documentation [here](https://github.com/avajs/ava).
 
 To run the tests, simply do
 
