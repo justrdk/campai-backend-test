@@ -8,11 +8,13 @@ const queryContactGroup = (query) => new Bluebird((resolve, reject) => {
 		$text: {
 			$search: `\"${query}\"`
 		}
-	}, 'name city', (err, orgs) => {
+	}, 'name city')
+	.limit(3)
+	.exec((err, contactgroups) => {
 		if (err) {
 			return reject(err);
 		}
-		return resolve(orgs);
+		return resolve(contactgroups.map(({ name, city }) => ({ name, city, dataSetType: 'contactgroup' })))
 	});
 });
 	
@@ -21,7 +23,7 @@ const searchContactGroups = async (query) => {
 	try {
 		mongoose.connect('mongodb://localhost/campai');
 		const contactgroups = await queryContactGroup(query);
-		return Promise.resolve({ contactgroups });
+		return Promise.resolve(contactgroups);
 	} catch (err) {
 		return Promise.reject({ err });
 	} finally {

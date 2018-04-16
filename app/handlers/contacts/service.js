@@ -10,13 +10,15 @@ const queryContacts = (query) => new Bluebird((resolve, reject) => {
 		$text: {
 			$search: `\"${query}\"`
 		}
-	}, 'first_name last_name address.city org')
+	}, 'first_name last_name address.city org avatar')
 	.populate('org')
+	.limit(3)
 	.exec((err, contacts) => {
 		if (err) {
 			return reject(err);
 		}
-		return resolve(contacts)
+		return resolve(contacts.map(({ first_name, last_name, address: {city}, org, avatar}) =>
+			({first_name, last_name, city, org, avatar, dataSetType: 'contact'})))
 	});
 });
 	
@@ -25,7 +27,7 @@ const searchContacts = async (query) => {
 	try {
 		mongoose.connect('mongodb://localhost/campai');
 		const contacts = await queryContacts(query);
-		return Promise.resolve({ contacts });
+		return Promise.resolve(contacts);
 	} catch (err) {
 		return Promise.reject({ err });
 	} finally {

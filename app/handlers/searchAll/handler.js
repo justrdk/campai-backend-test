@@ -6,14 +6,10 @@ const searchOrganizations = async (request) => {
 	const { query } = request;
 	const { search } = query;
 	try {
-		const organizations = await organizationsService.searchOrgs(search);
+		const orgs = await organizationsService.searchOrgs(search);
 		const contacts = await contactsService.searchContacts(search);
 		const contactGroups = await contactGroupsService.searchContactGroups(search);
-		return {
-			...organizations,
-			...contacts,
-			...contactGroups,
-		};
+		return [].concat.apply([], [orgs, contacts, contactGroups])
 	} catch (err) {
 		console.log('err', err);
 		return err;
