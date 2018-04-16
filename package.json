@@ -4,7 +4,7 @@
     "description": "Backend challenge for campai role as fullstack developer",
     "main": "index.js",
     "scripts": {
-        "test": "ava --verbose",
+        "test": "ava --verbose --tap | tap-nyan",
         "fake-data": "mongorestore mongo/campai/ --db campai"
     },
     "repository": {
@@ -18,7 +18,9 @@
     },
     "homepage": "https://github.com/midyan/campai-backend-test#readme",
     "devDependencies": {
-        "ava": "^0.25.0"
+        "ava": "^0.25.0",
+        "sinon": "^4.5.0",
+        "tap-nyan": "^1.1.0"
     },
     "dependencies": {
         "bluebird": "^3.5.1",
