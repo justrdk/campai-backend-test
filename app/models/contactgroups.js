@@ -40,8 +40,6 @@ const contactGroupsSchema = Schema({
 	__deleteContacts: Boolean,
 });
 
-contactGroupsSchema.index({ name: 'text' });
-
 const ContactGroupsModel = mongoose.model('contactgroups', contactGroupsSchema);
 
 module.exports = ContactGroupsModel;

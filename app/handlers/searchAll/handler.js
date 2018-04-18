@@ -11,7 +11,6 @@ const searchOrganizations = async (request) => {
 		const contactGroups = await contactGroupsService.searchContactGroups(search);
 		return [].concat.apply([], [orgs, contacts, contactGroups])
 	} catch (err) {
-		console.log('err', err);
 		return err;
 	}
 };

@@ -23,8 +23,6 @@ const orgsSchema = Schema({
 	fake_data: Boolean,
 });
 
-orgsSchema.index({ name: 'text', type: 'text', city: 'text' });
-
 const OrgsModel = mongoose.model('orgs', orgsSchema);
 
 module.exports = OrgsModel;

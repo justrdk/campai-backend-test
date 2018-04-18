@@ -79,8 +79,6 @@ const contactsSchema = Schema({
 	member_exit: String,
 });
 
-contactsSchema.index({ first_name: 'text', last_name: 'text', 'org.name': 'text' });
-
 const ContactsModel = mongoose.model('contacts', contactsSchema);
 
 module.exports = ContactsModel;

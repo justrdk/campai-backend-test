@@ -4,6 +4,7 @@
     "description": "Backend challenge for campai role as fullstack developer",
     "main": "index.js",
     "scripts": {
+        "start": "node index.js",
         "test": "ava --verbose --tap | tap-nyan",
         "fake-data": "mongorestore mongo/campai/ --db campai"
     },

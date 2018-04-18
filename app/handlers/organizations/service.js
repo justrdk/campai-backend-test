@@ -1,8 +1,7 @@
 const OrgModel = require('../../models/orgs');
-const mongoose = require('mongoose');
 const Bluebird = require('bluebird');
 
-const queryOrg = (query) => new Bluebird((resolve, reject) => {
+const queryOrg = async (query) => {
 	const pattern = `.*${query}.*`
 	OrgModel.find({
 		name: {
@@ -21,24 +20,19 @@ const queryOrg = (query) => new Bluebird((resolve, reject) => {
 	.limit(3)
 	.exec((err, orgs) => {
 		if (err) {
-			return reject(err);
+			return (err);
 		}
-		return resolve(orgs.map(({ name, type, city }) => ({name, type, city, dataSetType: 'org'})))
+		return orgs.map(({ name, type, city }) => ({name, type, city, dataSetType: 'org'}))
 	});
-});
+};
 	
 
 const searchOrgs = async (query) => {
 	try {
-		mongoose.connect('mongodb://localhost/campai');
 		const orgs = await queryOrg(query);
 		return orgs;
 	} catch (err) {
-		return Promise.reject({
-			err,
-		});
-	} finally {
-		mongoose.connection.close()
+		return { err };
 	}
 };
 

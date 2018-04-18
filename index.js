@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+const mongoose = require('mongoose');
 const chalk = require('chalk');
 const routes = require('./app/routes');
 
@@ -17,6 +18,7 @@ server
 	.start()
 	.then(() => {
 		server.route(routes);
+		mongoose.connect('mongodb://localhost/campai');
 		console.log(success('Server started at localhost'));
 	})
 	.catch(err => console.log(error(`Error: ${err}`)));
