@@ -25,4 +25,6 @@ const orgsSchema = Schema({
 
 orgsSchema.index({ name: 'text', type: 'text', city: 'text' });
 
-module.exports = orgsSchema;
+const OrgsModel = mongoose.model('orgs', orgsSchema);
+
+module.exports = OrgsModel;

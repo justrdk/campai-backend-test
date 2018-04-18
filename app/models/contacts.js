@@ -81,4 +81,6 @@ const contactsSchema = Schema({
 
 contactsSchema.index({ first_name: 'text', last_name: 'text', 'org.name': 'text' });
 
-module.exports = contactsSchema;
+const ContactsModel = mongoose.model('contacts', contactsSchema);
+
+module.exports = ContactsModel;

@@ -42,4 +42,6 @@ const contactGroupsSchema = Schema({
 
 contactGroupsSchema.index({ name: 'text' });
 
-module.exports = contactGroupsSchema;
+const ContactGroupsModel = mongoose.model('contactgroups', contactGroupsSchema);
+
+module.exports = ContactGroupsModel;

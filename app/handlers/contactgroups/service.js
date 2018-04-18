@@ -1,12 +1,13 @@
-const ContactGroupsSchema = require('../../models/contactgroups');
+const ContactGroupsModel = require('../../models/contactgroups');
 const mongoose = require('mongoose');
 const Bluebird = require('bluebird');
 
 const queryContactGroup = (query) => new Bluebird((resolve, reject) => {
-	const ContactGroupsModel = mongoose.model('contactgroups', ContactGroupsSchema);
+	const pattern = `.*${query}.*`
 	ContactGroupsModel.find({
-		$text: {
-			$search: `\"${query}\"`
+		name: {
+			$regex: pattern,
+			$options: 'i'
 		}
 	}, 'name city')
 	.limit(3)
@@ -23,7 +24,7 @@ const searchContactGroups = async (query) => {
 	try {
 		mongoose.connect('mongodb://localhost/campai');
 		const contactgroups = await queryContactGroup(query);
-		return Promise.resolve(contactgroups);
+		return contactgroups
 	} catch (err) {
 		return Promise.reject({ err });
 	} finally {

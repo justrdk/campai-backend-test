@@ -1,15 +1,22 @@
-const ContactsSchema = require('../../models/contacts');
-const OrgSchema = require('../../models/orgs');
+const ContactsModel = require('../../models/contacts');
 const mongoose = require('mongoose');
 const Bluebird = require('bluebird');
 
 const queryContacts = (query) => new Bluebird((resolve, reject) => {
-	const ContactsModel = mongoose.model('contacts', ContactsSchema);
-	const OrgModel = mongoose.model('orgs', OrgSchema);
+	const pattern = `.*${query}.*`
 	ContactsModel.find({
-		$text: {
-			$search: `\"${query}\"`
-		}
+		first_name: {
+			$regex: pattern,
+			options: 'i',
+		},
+		last_name: {
+			$regex: pattern,
+			options: 'i',
+		},
+		'org.name': {
+			$regex: pattern,
+			options: 'i',
+		},
 	}, 'first_name last_name address.city org avatar')
 	.populate('org')
 	.limit(3)
@@ -27,7 +34,7 @@ const searchContacts = async (query) => {
 	try {
 		mongoose.connect('mongodb://localhost/campai');
 		const contacts = await queryContacts(query);
-		return Promise.resolve(contacts);
+		return contacts;
 	} catch (err) {
 		return Promise.reject({ err });
 	} finally {
