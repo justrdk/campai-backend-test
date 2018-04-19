@@ -1,30 +1,23 @@
 const OrgModel = require('../../models/orgs');
-const Bluebird = require('bluebird');
 
-const queryOrg = async (query) => {
-	const pattern = `.*${query}.*`
+const queryOrg = query => new Promise((resolve, reject) => {
 	OrgModel.find({
-		name: {
-			$regex: pattern,
-			$options: 'i'
-		},
-		type: {
-			$regex: pattern,
-			$options: 'i'
-		},
-		city: {
-			$regex: pattern,
-			$options: 'i'
-		}
+		$or: [{
+			name: new RegExp(query, 'i'),
+		}, {
+			type: new RegExp(query, 'i'),
+		}, {
+			city: new RegExp(query, 'i'),
+		}]
 	}, 'name type city')
 	.limit(3)
 	.exec((err, orgs) => {
 		if (err) {
-			return (err);
+			return reject(err);
 		}
-		return orgs.map(({ name, type, city }) => ({name, type, city, dataSetType: 'org'}))
+		return resolve(orgs.map(({ name, type, city }) => ({name, type, city, dataSetType: 'org'})));
 	});
-};
+});
 	
 
 const searchOrgs = async (query) => {

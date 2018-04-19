@@ -1,22 +1,17 @@
 const ContactGroupsModel = require('../../models/contactgroups');
-const Bluebird = require('bluebird');
 
-const queryContactGroup = async (query) => {
-	const pattern = `.*${query}.*`
+const queryContactGroup = query => new Promise((resolve, reject) => {
 	ContactGroupsModel.find({
-		name: {
-			$regex: pattern,
-			$options: 'i'
-		}
+		name: new RegExp(query, 'i'),
 	}, 'name city')
 	.limit(3)
 	.exec((err, contactgroups) => {
 		if (err) {
-			return err;
+			return reject(err);
 		}
-		return contactgroups.map(({ name, city }) => ({ name, city, dataSetType: 'contactgroup' }))
+		return resolve(contactgroups.map(({ name, city }) => ({ name, city, dataSetType: 'contactgroup' })));
 	});
-};
+});
 	
 
 const searchContactGroups = async (query) => {
@@ -24,6 +19,7 @@ const searchContactGroups = async (query) => {
 		const contactgroups = await queryContactGroup(query);
 		return contactgroups
 	} catch (err) {
+		console.log('err', err)
 		return { err };
 	}
 };
