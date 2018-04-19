@@ -27,7 +27,7 @@ const searchContacts = async (query) => {
 		const contacts = await queryContacts(query);
 		return contacts;
 	} catch (err) {
-		return { err };
+		return err;
 	}
 };
 

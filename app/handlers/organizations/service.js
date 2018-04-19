@@ -25,7 +25,7 @@ const searchOrgs = async (query) => {
 		const orgs = await queryOrg(query);
 		return orgs;
 	} catch (err) {
-		return { err };
+		return err;
 	}
 };
 

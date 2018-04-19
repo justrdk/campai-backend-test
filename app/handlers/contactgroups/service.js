@@ -17,10 +17,9 @@ const queryContactGroup = query => new Promise((resolve, reject) => {
 const searchContactGroups = async (query) => {
 	try {
 		const contactgroups = await queryContactGroup(query);
-		return contactgroups
+		return contactgroups;
 	} catch (err) {
-		console.log('err', err)
-		return { err };
+		return err;
 	}
 };
 
