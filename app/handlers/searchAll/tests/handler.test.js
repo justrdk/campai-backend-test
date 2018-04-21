@@ -19,7 +19,11 @@ test('searchOrgs', async t => {
 	sinon.stub(contactsService, 'searchContacts').resolves(expectedContacts);
 	sinon.stub(contactgroupsService, 'searchContactGroups').resolves(expectedContactGroup);
 
-	const expectedResult = [].concat.apply([], [expectedOrgs, expectedContacts, expectedContactGroup]);
+	const expectedResult = {
+		orgs: expectedOrgs,
+		contactGroups: expectedContactGroup,
+		contacts: expectedContacts,
+	}
 
 	const result = await handler(request);
 	t.deepEqual(await result, expectedResult);
