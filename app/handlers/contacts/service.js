@@ -16,8 +16,7 @@ const queryContacts = query => new Promise((resolve, reject) => {
 		if (err) {
 			return reject(err);
 		}
-		return resolve(contacts.map(({ first_name, last_name, address: {city}, org, avatar}) =>
-			({first_name, last_name, city, org, avatar, dataSetType: 'contact'})));
+		return resolve(contacts);
 	});
 });
 	

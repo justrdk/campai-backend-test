@@ -9,7 +9,11 @@ const searchOrganizations = async (request) => {
 		const orgs = await organizationsService.searchOrgs(search);
 		const contacts = await contactsService.searchContacts(search);
 		const contactGroups = await contactGroupsService.searchContactGroups(search);
-		return [].concat.apply([], [orgs, contacts, contactGroups])
+		return {
+			orgs,
+			contacts,
+			contactGroups,
+		};
 	} catch (err) {
 		return err;
 	}

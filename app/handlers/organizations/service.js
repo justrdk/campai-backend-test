@@ -15,7 +15,7 @@ const queryOrg = query => new Promise((resolve, reject) => {
 		if (err) {
 			return reject(err);
 		}
-		return resolve(orgs.map(({ name, type, city }) => ({name, type, city, dataSetType: 'org'})));
+		return resolve(orgs);
 	});
 });
 	
