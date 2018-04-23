@@ -1,7 +1,6 @@
 const ContactsModel = require('../../models/contacts');
 
-const queryContacts = query => new Promise((resolve, reject) => {
-	ContactsModel.find({
+const queryContacts = query => ContactsModel.find({
 		$or: [{
 			first_name: new RegExp(query, 'i'),
 		}, {
@@ -12,14 +11,7 @@ const queryContacts = query => new Promise((resolve, reject) => {
 	}, 'first_name last_name address.city org avatar')
 	.populate('org')
 	.limit(3)
-	.exec((err, contacts) => {
-		if (err) {
-			return reject(err);
-		}
-		return resolve(contacts);
-	});
-});
-	
+	.exec();
 
 const searchContacts = async (query) => {
 	try {

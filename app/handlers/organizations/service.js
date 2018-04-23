@@ -1,7 +1,6 @@
 const OrgModel = require('../../models/orgs');
 
-const queryOrg = query => new Promise((resolve, reject) => {
-	OrgModel.find({
+const queryOrg = query => OrgModel.find({
 		$or: [{
 			name: new RegExp(query, 'i'),
 		}, {
@@ -11,14 +10,7 @@ const queryOrg = query => new Promise((resolve, reject) => {
 		}]
 	}, 'name type city')
 	.limit(3)
-	.exec((err, orgs) => {
-		if (err) {
-			return reject(err);
-		}
-		return resolve(orgs);
-	});
-});
-	
+	.exec();
 
 const searchOrgs = async (query) => {
 	try {
